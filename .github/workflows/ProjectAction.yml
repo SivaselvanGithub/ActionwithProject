@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Project Private
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Update project visibility
         uses: ./
         with:
