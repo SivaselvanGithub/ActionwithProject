@@ -8,8 +8,12 @@ on:
     types: [opened, reopened, synchronize]
     
 jobs:
-
-  annotate-pr:
+-ProjectVisiblity:
+  - name: Update project visibility
+    uses: ./
+    with:
+      token: ${{ secrets.GH_PROJECT_TOKEN }}
+ -annotate-pr:
     runs-on: ubuntu-latest
     name: Annotates pull request with metadata
     steps:
