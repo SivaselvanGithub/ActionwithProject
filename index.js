@@ -13,13 +13,7 @@ const main = async () => {
     const token = core.getInput('token', { required: true });
 
 
-    const cardHTML = `
-    <div class="card">
-        <h1>${owner}</h1>
-        
-    </div>`
-const main = document.getElementById('main')
-main.innerHTML = cardHTML
+   
     /**
      * Now we need to create an instance of Octokit which will use to call
      * GitHub's REST API endpoints.
@@ -128,8 +122,10 @@ main.innerHTML = cardHTML
 }
 
 async function run() {
-	const authToken = core.getInput('token')
-	const octokit = github.getOctokit(authToken)
+	
+	 const token = core.getInput('token', { required: true });
+
+	const octokit = github.getOctokit(token)
 
 	const orgProjectsList = []
 
@@ -162,6 +158,6 @@ async function run() {
 	}
 }
 
-run()
+run();
 // Call the main function to run the action
 main();
