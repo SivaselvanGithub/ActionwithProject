@@ -8482,6 +8482,8 @@ const main = async () => {
     const pr_number = core.getInput('pr_number', { required: true });
     const token = core.getInput('token', { required: true });
 
+
+   
     /**
      * Now we need to create an instance of Octokit which will use to call
      * GitHub's REST API endpoints.
@@ -8582,13 +8584,58 @@ const main = async () => {
       `
     });
 
+  
+
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
+async function run() {
+	
+    const owner = core.getInput('owner', { required: true });
+    const repo = core.getInput('repo', { required: true });
+    const pr_number = core.getInput('pr_number', { required: true });
+    const token = core.getInput('token', { required: true });
+	
+
+	const octokit = github.getOctokit(token)
+
+	const orgProjectsList = []
+
+	// Get all org projects
+	const orgProjects = await octokit.rest.projects
+		.listForOrg({
+			org: github.context.repo.owner,
+		})
+		.then((result) => {
+			// Push repo ids
+			result.data.forEach((project) => {
+				orgProjectsList.push(project.id)
+			})
+		})
+		.catch((error) => {
+			core.setFailed(error.message)
+		})
+
+  core.info(`Found ${orgProjectsList.length} organization projects`)
+
+	// Set all projects to private
+	if (orgProjectsList.length > 0) {
+		orgProjectsList.forEach(async (projectId) => {
+      core.info(`Setting project ${projectId} to private...`)
+			await octokit.rest.projects.update({
+				project_id: projectId,
+				private: true,
+			})
+		})
+	}
+}
+
+run();
 // Call the main function to run the action
 main();
+
 })();
 
 module.exports = __webpack_exports__;
