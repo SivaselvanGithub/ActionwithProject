@@ -8,15 +8,14 @@ on:
     types: [opened, reopened, synchronize]
     
 jobs:
-  -ProjectVisiblity:
-    - name: Update project visibility
-      uses: ./
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-  -annotate-pr:
+  Project Private:
     runs-on: ubuntu-latest
-    name: Annotates pull request with metadata
+    name: Project Private
     steps:
+      - name: Update project visibility
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Annotate PR
         uses: SivaselvanGithub/ActionwithProject@main
         with:
