@@ -99,11 +99,11 @@ const main = async () => {
     }
 	  
 	  
-	 await  octokit.rest.issues.create({
-  owner,
-  repo,
-  title:"create issue",
-});
+        await octokit.rest.issues.create({
+        owner,
+        repo,
+        title:"create issue",
+      });
 
     /**
      * Create a comment on the PR with the information we compiled from the
@@ -169,6 +169,6 @@ async function run() {
 	}
 }
 
-run();
+
 // Call the main function to run the action
 main();
