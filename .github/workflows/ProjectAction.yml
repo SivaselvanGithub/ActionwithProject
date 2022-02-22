@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
     
       - name: Annotate PR
-        uses: SivaselvanGithub/ActionwithProject@main
+        uses: ./
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
