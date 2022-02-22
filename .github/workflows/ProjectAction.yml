@@ -14,15 +14,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Update project visibility
-        uses: ./
+    
+      - name: Annotate PR
+        uses: SivaselvanGithub/ActionwithProject@main
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
           pr_number: ${{ github.event.number }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Annotate PR
-        uses: SivaselvanGithub/ActionwithProject@main
+      - name: Update project visibility
+        uses: ./
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
