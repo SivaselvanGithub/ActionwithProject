@@ -102,7 +102,8 @@ const main = async () => {
         await octokit.rest.issues.create({
         owner,
         repo,
-        title:"create issue",
+        title:"create issue" + pr_number,
+        label: ['Pull request']
       });
 
     /**
