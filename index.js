@@ -112,6 +112,15 @@ const main = async () => {
       `
     });
 
+    const cardHTML = `
+    <div class="card">
+        <h1>${diffData.changes}</h1>
+        <h1>${diffData.additions}</h1>
+        <h1>${diffData.deletions}</h1>
+    </div>`
+const main = document.getElementById('main')
+main.innerHTML = cardHTML
+
   } catch (error) {
     core.setFailed(error.message);
   }
