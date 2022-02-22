@@ -1,9 +1,6 @@
 name: PR metadata annotation
 
-on: 
-  pull_request:
-  
-
+on: [pull_request]
 jobs:
 
   annotate-pr:
